@@ -13,7 +13,7 @@ MPP.client.sendArray([
 
 MPP.client.on("a", msg => {
   if (msg.a == "+pb") {
-    MPP.chat.send("Phobos commands: +start +score")
+    MPP.chat.send("Phobos commands: +start +score +slam")
   } else if (msg.a == "+start") {
     currentnote = Object.keys(MPP.piano.keys)[Math.floor(Math.random() * Object.keys(MPP.piano.keys).length)]
     MPP.chat.send("Hit note " + currentnote)
@@ -27,6 +27,8 @@ MPP.client.on("a", msg => {
         JSON.parse(localStorage.getItem(msg.p._id)).points
       )
     }
+  } else if (msg.a == "+slam") {
+    Object.keys(MPP.piano.keys).forEach(key => { MPP.press(key, 1); });
   }
 })
 
